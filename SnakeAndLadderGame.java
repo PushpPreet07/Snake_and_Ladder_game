@@ -21,10 +21,35 @@ public class SnakeAndLadderGame {
     private void playGame() {
         int position = 0;
         int diceValue;
-        int newPosition;
-
+        int newPosition=0;
+        diceValue = rollDice();
+        System.out.println("Dice rolled: " + diceValue);
+        int option = checkOption();
+        while (position < WINNING_POSITION) {  
+            switch (option) {
+                case 1:
+                    System.out.println("No Play. Player stays in the same position.");
+                    break;
+                case 2:
+                    newPosition = position + diceValue;
+                    newPosition = handleSnakeAndLadder(newPosition);
+                    System.out.println("Ladder. Player moves ahead by " + diceValue + " positions.");
+                    break;
+                case 3:
+                    newPosition = position - diceValue;
+                    newPosition = handleSnakeAndLadder(newPosition);
+                    System.out.println("Snake. Player moves behind by " + diceValue + " positions.");
+                    break;
+            }
+        position = newPosition;
+        if (position < 0) {
+            position = 0;
+        }
+        // Display the current position
+        System.out.println("New Position: " + position);
+        }
     }
-    /*
+     /*
      @desc-Method to simulate the game
      @param-None
      @return-random number between 1-6
@@ -32,5 +57,34 @@ public class SnakeAndLadderGame {
     private int rollDice() {
         Random random = new Random();
         return random.nextInt(6) + 1;
-    }    
+    }
+    /*
+     @desc-Simulate the player's choice using random numbers
+     @param-None
+     @return-random number between 1-3
+     */
+    private int checkOption() {
+        Random random = new Random();
+        return random.nextInt(3) + 1; // 1 for No Play, 2 for Ladder, 3 for Snake
+    }
+     /*
+     @desc-Handle snakes and ladders as before
+     @param-(int position, int numberOnDice)
+     @return-random number between 1-3
+     */
+    private int handleSnakeAndLadder(int position) {
+        for (int snake : SNAKES) {
+            if (position == snake) {
+                return position - 10;
+            }
+        }
+
+        for (int ladder : LADDERS) {
+            if (position == ladder) {
+                return position + 10;
+            }
+        }
+        return position;
+    }
+  
 }
