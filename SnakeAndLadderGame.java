@@ -4,7 +4,7 @@ public class SnakeAndLadderGame {
     // Constants for board size and winning position
     private static final int BOARD_SIZE = 100;
     private static final int WINNING_POSITION = 100;
-    
+
     // Arrays to represent snakes and ladders
     private static final int[] SNAKES = {16, 47, 49, 56, 62, 64, 87, 93, 95, 98};
     private static final int[] LADDERS = {1, 4, 9, 21, 28, 36, 51, 71, 80};
@@ -23,5 +23,14 @@ public class SnakeAndLadderGame {
         int diceValue;
         int newPosition;
 
+    }
+    /*
+     @desc-Method to simulate the game
+     @param-None
+     @return-random number between 1-6
+     */
+    private int rollDice() {
+        Random random = new Random();
+        return random.nextInt(6) + 1;
     }    
 }
